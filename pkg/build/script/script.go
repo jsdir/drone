@@ -52,6 +52,9 @@ type Build struct {
 	// to identify the build.
 	Name string
 
+	// Setup specifies the setup and installation commands.
+	Setup []string
+
 	// Script specifies the build and test commands.
 	Script []string
 

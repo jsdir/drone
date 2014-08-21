@@ -475,6 +475,11 @@ func (b *Builder) writeDockerfile(dir string) error {
 	dockerfile.WriteAdd("proxy.sh", "/etc/drone.d/")
 	dockerfile.WriteEntrypoint("/bin/bash -e /usr/local/bin/drone")
 
+	// write the setup commands
+	for _, cmd := range b.Build.Setup {
+		dockerfile.WriteCmd(cmd)
+	}
+
 	// write the Dockerfile to the temporary directory
 	return ioutil.WriteFile(filepath.Join(dir, "Dockerfile"), dockerfile.Bytes(), 0700)
 }
